@@ -1,0 +1,27 @@
+tabel 1
+--------
+CREATE TABLE `pengguna` (
+`id_pengguna` int(11) NOT NULL auto_increment,
+`nama` varchar(20) NOT NULL,
+PRIMARY KEY  (`id_pengguna`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+INSERT INTO `pengguna` (`id_pengguna`, `nama`) VALUES
+(1, 'khalifavi'),
+(2, 'silvershade'),
+(3, 'kaelina');
+
+tabel 2
+-------
+CREATE TABLE `pengguna_lengkap` (
+`id_pengguna` int(11) NOT NULL,
+`alamat` varchar(50) NOT NULL,
+`telepon` varchar(15) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `pengguna_lengkap` (`id_pengguna`, `alamat`, `telepon`) VALUES
+(1, 'cigiringsing', '081910435544'),
+(2, 'cijambe', '022 7815913'),
+(4, 'tubagus ismail', '022 91724325');
+
