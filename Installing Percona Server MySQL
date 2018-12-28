@@ -1,0 +1,35 @@
+Installing Percona Server from Percona yum repository
+
+yum install http://www.percona.com/downloads/percona-release/redhat/0.1-6/percona-release-0.1-6.noarch.rpm
+
+yum list | grep percona
+
+yum install Percona-Server-server-57
+
+Percona Server stores the data files in /var/lib/mysql/ by default. You can find the configuration file that is used to manage Percona Server in /etc/my.cnf.
+
+service mysql start
+
+service mysql stop
+
+service mysql restart
+
+
+Uninstalling Percona Server
+
+service mysql stop
+
+yum remove Percona-Server*
+
+Remove the data and configuration files
+rm -rf /var/lib/mysql
+rm -f /etc/my.cnf
+
+
+
+
+
+
+
+sumber :
+https://www.percona.com/doc/percona-server/5.7/installation/yum_repo.html
