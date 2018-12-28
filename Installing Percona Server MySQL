@@ -25,7 +25,13 @@ Remove the data and configuration files
 rm -rf /var/lib/mysql
 rm -f /etc/my.cnf
 
+Default password after installing in CentOS7 
+cat /var/log/mysqld.log |grep generated
 
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'test';
+flush privileges;
+SELECT User, Host, HEX(authentication_string) FROM mysql.user;
 
 
 
