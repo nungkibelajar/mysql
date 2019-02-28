@@ -1,0 +1,46 @@
+Problem reboot all node
+------------------------
+permasalahannya : [Phan Xuân Vũ]
+I have 3 node.
+Then i restart 3 node in the same time that Making it for many times to run the system
+But failed
+I Try run:
+# /etc/init.d/mysql bootstrap-pxc
+Bootstrapping PXC (Percona XtraDB Cluster)MySQL (Percona XtraDB Cluster) is not running, but lock file (/var/lock/subsys/mysql) exists [FAILED]
+Starting MySQL (Percona XtraDB Cluster)....The server quit without updating PID file (/var/lib/mysql/CentOS64-IP203.pid). [FAILED]
+MySQL (Percona XtraDB Cluster) server startup failed! [FAILED]
+
+# service mysql restart
+Shutting down MySQL (Percona XtraDB Cluster)MySQL (Percona [FAILED]luster) PID file could not be found!
+MySQL (Percona XtraDB Cluster) is not running, but lock fil[FAILED]lock/subsys/mysql) exists
+Starting MySQL (Percona XtraDB Cluster).....................................The server quit without updating PID file (/var/lib/mysql/CentOS64-IP203.pid). [FAILED]
+MySQL (Percona XtraDB Cluster) server startup failed! [FAILED]
+Failed to restart server. [FAILED]
+You have new mail in /var/spool/mail/root
+
+# /etc/init.d/mysql start --wsrep-cluster-address="gcomm://"
+MySQL (Percona XtraDB Cluster) is not running, but lock fil[FAILED]lock/subsys/mysql) exists
+Starting MySQL (Percona XtraDB Cluster)....The server quit without updating PID file (/var/lib/mysql/CentOS64-IP203.pid). [FAILED]
+MySQL (Percona XtraDB Cluster) server startup failed! [FAILED]
+
+My Log:
+
+# tail -f CentOS64-IP203.err
+2017-04-13T07:48:24.197488Z 0 [ERROR] WSREP: It may not be safe to bootstrap the cluster from this node. It was not the last one to leave the cluster and may not contain all the updates. To force cluster bootstrap with this node, edit the grastate.dat file manually and set safe_to_bootstrap to 1 .
+2017-04-13T07:48:24.197503Z 0 [ERROR] WSREP: wsrep::connect(gcomm://) failed: 7
+2017-04-13T07:48:24.197510Z 0 [ERROR] Aborting
+
+2017-04-13T07:48:24.197518Z 0 [Note] Giving 0 client threads a chance to die gracefully
+2017-04-13T07:48:24.197529Z 0 [Note] WSREP: Service disconnected.
+2017-04-13T07:48:27.197656Z 0 [Note] WSREP: Some threads may fail to exit.
+2017-04-13T07:48:27.197726Z 0 [Note] Binlog end
+2017-04-13T07:48:27.197935Z 0 [Note] /usr/sbin/mysqld: Shutdown complete
+
+please help me
+
+solusi : [ DBennett Percona Director of DS ]
+Hi Phan,
+
+Our policy has always been to avoid data loss. In this particular case, forcing a specific PXC node to bootstrap may result in the loss of some data. Other nodes may have committed transactions that are not reflected on this node. If you are willing to accept the possibility of data loss, you may be able to force a specific node to bootstrap by editing the grastate.dat file in an automated way before starting the the service using bootstrap-pxc.
+
+sed -i 's/^safe_to_bootstrap:.*/safe_to_bootstrap: 1/' /var/lib/mysql/grastate.dat
