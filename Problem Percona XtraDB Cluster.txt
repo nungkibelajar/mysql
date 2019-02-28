@@ -44,3 +44,4 @@ Hi Phan,
 Our policy has always been to avoid data loss. In this particular case, forcing a specific PXC node to bootstrap may result in the loss of some data. Other nodes may have committed transactions that are not reflected on this node. If you are willing to accept the possibility of data loss, you may be able to force a specific node to bootstrap by editing the grastate.dat file in an automated way before starting the the service using bootstrap-pxc.
 
 sed -i 's/^safe_to_bootstrap:.*/safe_to_bootstrap: 1/' /var/lib/mysql/grastate.dat
+
