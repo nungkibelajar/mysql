@@ -45,3 +45,5 @@ Our policy has always been to avoid data loss. In this particular case, forcing 
 
 sed -i 's/^safe_to_bootstrap:.*/safe_to_bootstrap: 1/' /var/lib/mysql/grastate.dat
 
+refernsi :
+https://www.percona.com/forums/questions-discussions/percona-xtradb-cluster/48128-problem-reboot-all-node
