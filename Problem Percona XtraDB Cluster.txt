@@ -1,4 +1,5 @@
-Problem reboot all node
+Problem reboot all node 
+{https://www.percona.com/forums/questions-discussions/percona-xtradb-cluster}
 ------------------------
 permasalahannya : [Phan Xuân Vũ]
 I have 3 node.
